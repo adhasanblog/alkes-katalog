@@ -10,7 +10,6 @@ import {initCTAHandler} from "./modules/cta-handler";
 import {initFaqAccordion} from "./modules/faq";
 
 
-console.log("Vite loaded");
 
 function init() {
     initMobileMenu();

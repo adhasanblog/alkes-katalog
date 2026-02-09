@@ -36,7 +36,6 @@ for (const t of targets) {
         const content = fs.readFileSync(f, "utf8");
         for (const re of t.patterns) {
             if (re.test(content)) {
-                console.error(`❌ Debug pattern ${re} found in: ${path.relative(ROOT, f)}`);
                 failed = true;
             }
         }
@@ -44,4 +43,4 @@ for (const t of targets) {
 }
 
 if (failed) process.exit(1);
-console.log("✅ No debug statements found.");
+process.exit(0);

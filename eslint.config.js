@@ -10,5 +10,11 @@ export default [
 			"no-console": ["error", { allow: ["warn", "error"] }],
 			"no-debugger": "error",
 		},
+    ignores: [
+      "assets/dist/**",
+      "assets/dist/.vite/**",
+      "assets/src/.vite/**",
+      "vendor/**",
+    ],
 	},
 	];

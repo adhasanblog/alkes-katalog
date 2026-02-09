@@ -35,7 +35,6 @@ export function initTabs() {
             );
             btn.setAttribute("aria-selected", "true");
 
-            console.log("Activating tab panel:", targetId);
             const panel = document.getElementById(targetId);
             if (panel) panel.classList.remove("hidden");
         });
