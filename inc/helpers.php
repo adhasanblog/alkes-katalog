@@ -53,7 +53,6 @@ if ( ! function_exists( 'alkes_price_text' ) ) {
 }
 
 
-
 /**
  * Parse specification text into key/value lines.
  *
