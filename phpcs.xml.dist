@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<ruleset name="Alkes Catalog Theme">
+	<description>PHPCS ruleset for Alkes Catalog WordPress Theme.</description>
+
+	<!-- Scan PHP saja -->
+	<arg name="extensions" value="php"/>
+	<file>.</file>
+
+	<!-- Exclude folder non-source -->
+	<exclude-pattern>vendor/*</exclude-pattern>
+	<exclude-pattern>node_modules/*</exclude-pattern>
+	<exclude-pattern>assets/dist/*</exclude-pattern>
+	<exclude-pattern>assets/src/*</exclude-pattern>
+
+	<!-- Exclude file non-theme runtime -->
+	<exclude-pattern>vite.config.js</exclude-pattern>
+	<exclude-pattern>eslint.config.js</exclude-pattern>
+	<exclude-pattern>*.config.js</exclude-pattern>
+	<exclude-pattern>*.mjs</exclude-pattern>
+	<exclude-pattern>*.cjs</exclude-pattern>
+
+	<!-- WordPress standards -->
+	<rule ref="WordPress" />
+	<rule ref="WordPress-Core" />
+	<rule ref="WordPress-Extra" />
+	<rule ref="WordPress-Docs" />
+
+	<!-- Matikan noise komentar ala Squiz -->
+	<rule ref="Squiz.Commenting.FileComment.Missing">
+		<severity>0</severity>
+	</rule>
+
+	<rule ref="Squiz.Commenting.InlineComment.InvalidEndChar">
+		<severity>0</severity>
+	</rule>
+</ruleset>

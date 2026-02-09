@@ -1,0 +1,17 @@
+{
+  "assets/src/css/app.css": {
+    "file": "css/app.css",
+    "src": "assets/src/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "assets/src/js/global.js": {
+    "file": "js/global.js",
+    "name": "global",
+    "src": "assets/src/js/global.js",
+    "isEntry": true
+  }
+}

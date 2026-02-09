@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@plugin '@tailwindcss/typography';
+
+
+@layer components {
+    .container-1280 {
+        @apply mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8
+    }
+
+    .section-y {
+        @apply py-10 md:py-14 lg:py-16;
+    }
+
+    .menu-topbar a {
+        @apply hover:text-gray-900;
+    }
+
+    .menu-home-primary a {
+        @apply hover:text-gray-900;
+    }
+
+    .menu-topbar-mobile a,
+    .menu-home-primary-mobile a {
+        @apply flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium text-gray-800 hover:bg-gray-50;
+    }
+
+    .menu-topbar-mobile li,
+    .menu-home-primary-mobile li {
+        @apply list-none;
+    }
+}

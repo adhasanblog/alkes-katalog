@@ -1,0 +1,55 @@
+name: Build & Sync Release (main)
+
+on:
+  workflow_run:
+    workflows: ["CI (Lint & Test)"]
+    branches: [dev]
+    types:
+      - completed
+
+jobs:
+  build-and-release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout DEV
+      - name: Checkout dev
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+
+      # ---------- Node ----------
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Node deps
+        run: npm ci
+
+      - name: Build assets
+        run: npm run build
+
+      # ---------- Switch to MAIN ----------
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main
+
+      - name: Sync built assets to main
+        run: |
+          rsync -av --delete \
+            assets/dist/ \
+            main/assets/dist/
+
+      - name: Commit & push to main
+        run: |
+          cd main
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add assets/dist
+          git commit -m "build: update production assets" || echo "No changes"
+          git push
