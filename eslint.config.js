@@ -1,5 +1,14 @@
 // eslint.config.js
 export default [
+  {
+    ignores: [
+      "vendor/**",
+      "node_modules/**",
+      "assets/dist/**",
+      "assets/dist/.vite/**",
+      "assets/src/.vite/**",
+    ],
+  },
 	{
 		files: ["assets/src/**/*.js"],
 			languageOptions: {
@@ -10,11 +19,6 @@ export default [
 			"no-console": ["error", { allow: ["warn", "error"] }],
 			"no-debugger": "error",
 		},
-    ignores: [
-      "assets/dist/**",
-      "assets/dist/.vite/**",
-      "assets/src/.vite/**",
-      "vendor/**",
-    ],
+
 	},
 	];
