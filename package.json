@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "lint-staged": {
     "*.php": [
-      "php vendor/bin/phpcbf --standard=phpcs.xml.dist",
+      "node scripts/phpcbf-staged.js",
       "php vendor/bin/phpcs --standard=phpcs.xml.dist"
     ],
     "assets/src/**/*.{js,mjs,cjs,ts,tsx}": [
