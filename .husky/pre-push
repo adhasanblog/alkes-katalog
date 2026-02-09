@@ -1,5 +1,15 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
 
-npm run lint:js
-vendor/bin/phpcs --standard=phpcs.xml.dist
+echo "🔍 Running pre-push checks..."
+
+npm run lint
+
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo "❌ Pre-push checks failed. Fix issues before pushing."
+  exit 1
+fi
+
+echo "✅ Pre-push checks passed."
+exit 0

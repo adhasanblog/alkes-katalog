@@ -17,6 +17,7 @@
     "lint:php:fix": "composer lint:php:fix",
     "lint:js": "eslint .",
     "lint:js:fix": "eslint . --fix",
+    "lint": "npm run lint:php && npm run lint:js",
     "dev": "vite build --watch",
     "build": "vite build",
     "prepare": "husky"
