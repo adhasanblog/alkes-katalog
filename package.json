@@ -20,7 +20,8 @@
     "lint": "npm run lint:php && npm run lint:js",
     "dev": "vite build --watch",
     "build": "vite build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "release": "semantic-release"
   },
   "keywords": [],
   "author": "",
@@ -34,10 +35,16 @@
     "vite": "^7.3.1"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^12.0.5",
+    "@semantic-release/release-notes-generator": "^14.1.0",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/typography": "^0.5.19",
     "eslint": "^10.0.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.7"
+    "lint-staged": "^16.2.7",
+    "semantic-release": "^25.0.3"
   }
 }

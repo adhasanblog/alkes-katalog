@@ -1,55 +1,61 @@
-name: Build & Sync Release (main)
+name: Release (auto version)
 
 on:
-  workflow_run:
-    workflows: ["CI (Lint & Test)"]
-    branches: [dev]
-    types:
-      - completed
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
 
 jobs:
-  build-and-release:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  release:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout DEV
-      - name: Checkout dev
+      - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: dev
+          fetch-depth: 0
 
-      # ---------- Node ----------
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
-      - name: Install Node deps
+      - name: Install deps
         run: npm ci
 
       - name: Build assets
         run: npm run build
 
-      # ---------- Switch to MAIN ----------
-      - name: Checkout main
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          path: main
-
-      - name: Sync built assets to main
+      - name: Prepare release directory
         run: |
-          rsync -av --delete \
-            assets/dist/ \
-            main/assets/dist/
+          mkdir -p release/alkes-catalog
+          rsync -av \
+            --exclude=".git" \
+            --exclude=".github" \
+            --exclude="node_modules" \
+            --exclude="vendor" \
+            --exclude="assets/src" \
+            --exclude="assets/src/.vite" \
+            --exclude="scripts" \
+            --exclude="tests" \
+            --exclude="phpcs.xml*" \
+            --exclude="eslint.config.*" \
+            --exclude=".eslintrc.*" \
+            --exclude=".eslintignore" \
+            --exclude="package*.json" \
+            --exclude="composer.*" \
+            --exclude="release" \
+            ./ release/alkes-catalog/
 
-      - name: Commit & push to main
+      - name: Create ZIP
         run: |
-          cd main
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add assets/dist
-          git commit -m "build: update production assets" || echo "No changes"
-          git push
+          cd release
+          zip -r alkes-catalog.zip alkes-catalog
+
+      - name: Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run release
